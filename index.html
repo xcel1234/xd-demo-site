@@ -209,6 +209,17 @@
         /* NOISE */
         .noise { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .025; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
+        /* WHATSAPP BUTTON */
+        #whatsapp-btn { position: fixed; bottom: 96px; right: 36px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: #25d366; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 28px rgba(37,211,102,.4); transition: transform .3s, box-shadow .3s; text-decoration: none; }
+        #whatsapp-btn:hover { transform: translateY(-3px) scale(1.08); box-shadow: 0 12px 36px rgba(37,211,102,.6); }
+        #whatsapp-btn svg { width: 26px; height: 26px; fill: #fff; }
+
+        /* BACK TO TOP */
+        #back-top { position: fixed; bottom: 36px; right: 36px; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 28px rgba(0,212,255,.35); opacity: 0; transform: translateY(16px) scale(.85); transition: opacity .35s, transform .35s, box-shadow .3s; pointer-events: none; }
+        #back-top.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        #back-top:hover { box-shadow: 0 12px 36px rgba(0,212,255,.55); transform: translateY(-3px) scale(1.08); }
+        #back-top svg { width: 20px; height: 20px; color: #fff; }
+
         /* RESPONSIVE */
         @media(max-width:1024px){ .srv-grid{grid-template-columns:repeat(2,1fr);} .why-grid{grid-template-columns:1fr;gap:40px;} .footer-grid{grid-template-columns:1fr 1fr;gap:36px;} }
         @media(max-width:768px){ nav{padding:14px 20px;} .nav-links{display:none;} #services,#why-us,#process,#tech,#cta{padding:80px 20px;} footer{padding:56px 20px 32px;} .srv-grid{grid-template-columns:1fr;} .proc-steps{flex-direction:column;gap:28px;} .proc-steps::before{display:none;} .footer-grid{grid-template-columns:1fr;gap:36px;} .f-bottom{flex-direction:column;gap:8px;text-align:center;} .cta-box{padding:46px 24px;} .why-grid{gap:50px;} }
@@ -220,6 +231,9 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <canvas id="bg-canvas"></canvas>
+<button id="back-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 <!-- NAV -->
 <nav id="nav">
@@ -631,12 +645,14 @@ gsap.from('.tech-pill',{ scrollTrigger:{trigger:'#tech',start:'top 85%'}, opacit
 // CTA
 gsap.from('.cta-box',{ scrollTrigger:{trigger:'#cta',start:'top 80%'}, opacity:0, scale:.95, duration:.75, ease:'power3.out' });
 
-// Navbar on scroll
+// Navbar + Back-to-top on scroll
 window.addEventListener('scroll',()=>{
     const nav = document.getElementById('nav');
     if(window.scrollY>60){ nav.style.background='rgba(5,5,8,.96)'; nav.style.borderBottomColor='rgba(0,212,255,.2)'; }
     else { nav.style.background='rgba(5,5,8,.55)'; nav.style.borderBottomColor='rgba(0,212,255,.1)'; }
+    document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
 });
+document.getElementById('back-top').addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); });
 
 // ===== 3D CARD TILT =====
 document.querySelectorAll('.srv-card').forEach(card=>{
