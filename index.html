@@ -632,21 +632,23 @@ heroTl.from('.hero-badge',{opacity:0,y:28,duration:.7})
       .from('.hero-btns',{opacity:0,y:24,duration:.6},'-=.4')
       .from('.stat-item',{opacity:0,y:22,stagger:.1,duration:.5},'-=.3');
 
+const ir = { immediateRender: false };
+
 // Services
-gsap.from('.srv-card',{ scrollTrigger:{trigger:'#services',start:'top 82%'}, opacity:0, y:55, duration:.65, stagger:.08, ease:'power3.out' });
+gsap.from('.srv-card',{ scrollTrigger:{trigger:'#services',start:'top 90%'}, opacity:0, y:55, duration:.65, stagger:.08, ease:'power3.out', ...ir });
 
 // Why us
-gsap.from('.why-left > *',{ scrollTrigger:{trigger:'#why-us',start:'top 80%'}, opacity:0, x:-38, duration:.65, stagger:.1, ease:'power3.out' });
-gsap.from('.device-wrap',{ scrollTrigger:{trigger:'#why-us',start:'top 80%'}, opacity:0, x:38, duration:.85, ease:'power3.out' });
+gsap.from('.why-left > *',{ scrollTrigger:{trigger:'#why-us',start:'top 90%'}, opacity:0, x:-38, duration:.65, stagger:.1, ease:'power3.out', ...ir });
+gsap.from('.device-wrap',{ scrollTrigger:{trigger:'#why-us',start:'top 90%'}, opacity:0, x:38, duration:.85, ease:'power3.out', ...ir });
 
 // Process
-gsap.from('.proc-step',{ scrollTrigger:{trigger:'#process',start:'top 80%'}, opacity:0, y:45, stagger:.14, duration:.65, ease:'power3.out' });
+gsap.from('.proc-step',{ scrollTrigger:{trigger:'#process',start:'top 90%'}, opacity:0, y:45, stagger:.14, duration:.65, ease:'power3.out', ...ir });
 
 // Tech
-gsap.from('.tech-pill',{ scrollTrigger:{trigger:'#tech',start:'top 85%'}, opacity:0, y:24, stagger:.04, duration:.5, ease:'power3.out' });
+gsap.from('.tech-pill',{ scrollTrigger:{trigger:'#tech',start:'top 90%'}, opacity:0, y:24, stagger:.04, duration:.5, ease:'power3.out', ...ir });
 
 // CTA
-gsap.from('.cta-box',{ scrollTrigger:{trigger:'#cta',start:'top 80%'}, opacity:0, scale:.95, duration:.75, ease:'power3.out' });
+gsap.from('.cta-box',{ scrollTrigger:{trigger:'#cta',start:'top 90%'}, opacity:0, scale:.95, duration:.75, ease:'power3.out', ...ir });
 
 // Navbar + Back-to-top on scroll
 window.addEventListener('scroll',()=>{
